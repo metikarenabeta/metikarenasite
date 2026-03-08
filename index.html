@@ -260,9 +260,9 @@ header {
 
 .countdown-wrap { margin: 52px 0 0; width: 100%; animation: fadeup .7s .35s ease both; }
 .release-line {
-  text-align: center; font-family: 'Bebas Neue', cursive;
-  font-size: .85rem; letter-spacing: 7px;
-  color: rgba(255,255,255,0.25); margin-bottom: 20px; text-transform: uppercase;
+  text-align: center; font-family: 'Exo 2', sans-serif;
+  font-size: .9rem; font-weight: 700; letter-spacing: 3px;
+  color: rgba(255,255,255,0.35); margin-bottom: 20px; text-transform: uppercase;
 }
 .countdown { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .cd-box {
@@ -399,103 +399,333 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
   .cd-num { font-size: 2.2rem; }
   .cd-sep { font-size: 1.8rem; }
   header { flex-direction: column; gap: 10px; align-items: center; }
+
+  /* ── Читаемые шрифты на телефоне ── */
+  .release-line {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: .8rem;
+  }
+  .cd-label {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .crystal-title {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 900;
+    letter-spacing: 1px;
+    font-size: 1.6rem;
+  }
+  .crystal-divider span {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: .75rem;
+  }
+  .counter-label {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .save-btn {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: .95rem;
+  }
+  .chests-divider span {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: .75rem;
+  }
+  .chests-title {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 900;
+    letter-spacing: 1px;
+    font-size: 1.6rem;
+  }
+  .chest-name {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0px;
+    font-size: .9rem;
+  }
+  .chest-tier-badge {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: .6rem;
+  }
+  .chest-price {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0px;
+    font-size: .88rem;
+  }
+  .lb-table {
+    font-size: .82rem;
+  }
+  .divider span {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: .72rem;
+  }
+  .gem-earned {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 1rem;
+  }
 }
+
+/* ── ENTER CRYSTAL BUTTON ── */
+.btn-enter-crystal {
+  width: 100%; padding: 18px;
+  font-family: 'Exo 2', sans-serif; font-size: 1.05rem; font-weight: 800; letter-spacing: 2px;
+  color: #0a0800;
+  background: linear-gradient(135deg, #f5c842, #e8a820, #f5c842);
+  background-size: 200% 100%;
+  border: none; border-radius: 14px; cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform .15s, box-shadow .2s, background-position .4s, opacity .3s;
+  box-shadow: 0 4px 28px rgba(245,200,66,0.28), 0 1px 0 rgba(255,255,255,0.15) inset;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.btn-enter-crystal:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(245,200,66,0.5); background-position: 100% 0; }
+.btn-enter-crystal:not(:disabled):active { transform: translateY(1px); }
+.btn-enter-crystal:disabled { opacity: .45; cursor: not-allowed; background: linear-gradient(135deg, #888, #666); box-shadow: none; color: rgba(255,255,255,0.4); }
+.btn-enter-crystal.unlocked { animation: pulse-gold 1.5s ease-in-out infinite; }
+@keyframes pulse-gold {
+  0%,100% { box-shadow: 0 4px 28px rgba(245,200,66,0.28); }
+  50% { box-shadow: 0 4px 48px rgba(245,200,66,0.7), 0 0 60px rgba(245,200,66,0.25); }
+}
+
+/* ── WHATS NEW MODAL ── */
+.whats-new-overlay {
+  display: none;
+  position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 9999;
+  background: rgba(0,0,0,0.85);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.whats-new-overlay.show { display: -webkit-flex; display: flex; animation: fadeup .4s ease; }
+.whats-new-box {
+  text-align: center; padding: 36px 28px 32px;
+  max-width: 420px; width: 100%;
+  background: linear-gradient(145deg, #0d0820, #150a30);
+  border: 1px solid rgba(200,140,255,0.25);
+  border-radius: 24px;
+  box-shadow: 0 0 80px rgba(0,0,0,0.9), 0 0 40px rgba(150,60,255,0.12);
+  position: relative; overflow: hidden;
+}
+.whats-new-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(245,200,66,0.8), rgba(200,120,255,0.8), transparent);
+}
+.whats-new-icon { font-size: 3rem; margin-bottom: 12px; display: block; animation: float-icon 2s ease-in-out infinite; }
+@keyframes float-icon { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.whats-new-title {
+  font-family: 'Exo 2', sans-serif; font-size: 1.3rem; font-weight: 900; letter-spacing: 1px;
+  color: #fff; margin-bottom: 24px; line-height: 1.4;
+}
+.whats-new-list { text-align: left; margin-bottom: 28px; display: flex; flex-direction: column; gap: 14px; }
+.whats-new-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 14px 16px;
+}
+.whats-new-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #f5c842, #e8a820);
+  color: #0a0800; font-family: 'Exo 2', sans-serif; font-size: .85rem; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 12px rgba(245,200,66,0.4);
+}
+.whats-new-text { flex: 1; }
+.whats-new-item-title {
+  font-family: 'Exo 2', sans-serif; font-size: .95rem; font-weight: 800; color: #fff;
+  margin-bottom: 4px;
+}
+.whats-new-item-desc {
+  font-size: .8rem; color: rgba(255,255,255,0.5); line-height: 1.5;
+}
+.whats-new-item-desc strong { color: #e0aaff; }
+.whats-new-btn {
+  width: 100%; padding: 16px;
+  font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 800; letter-spacing: 2px;
+  color: #0a0800;
+  background: linear-gradient(135deg, #f5c842, #e8a820);
+  border: none; border-radius: 12px; cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  transition: transform .15s, box-shadow .2s;
+  box-shadow: 0 4px 24px rgba(245,200,66,0.35);
+}
+.whats-new-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,200,66,0.55); }
+.whats-new-btn:active { transform: translateY(1px); }
 
 /* ── CRYSTAL SECTION ── */
 .crystal-section {
-  width: 100%; max-width: 500px;
+  width: 100%; max-width: 520px;
   margin: 0 auto 80px;
   text-align: center;
   animation: fadeup .7s .5s ease both;
+  background: linear-gradient(145deg, rgba(80,20,140,0.18), rgba(20,5,40,0.35));
+  border: 1px solid rgba(180,100,255,0.2);
+  border-radius: 24px;
+  padding: 32px 24px 28px;
+  box-shadow: 0 0 60px rgba(120,40,255,0.08), 0 8px 40px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+.crystal-section::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(200,120,255,0.7), rgba(245,200,66,0.4), rgba(200,120,255,0.7), transparent);
+  border-radius: 24px 24px 0 0;
 }
 .crystal-divider {
-  width: 100%; margin: 0 0 44px;
+  width: 100%; margin: 0 0 32px;
   display: flex; align-items: center; gap: 20px;
 }
 .crystal-divider::before, .crystal-divider::after {
   content: ''; flex: 1; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(180,100,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(180,100,255,0.4), transparent);
 }
 .crystal-divider span {
-  font-family: 'Bebas Neue', cursive; font-size: .8rem; letter-spacing: 5px;
-  color: rgba(180,100,255,0.5); white-space: nowrap;
+  font-family: 'Exo 2', sans-serif; font-size: .85rem; font-weight: 700; letter-spacing: 2px;
+  color: rgba(200,140,255,0.85); white-space: nowrap;
 }
 .crystal-title {
-  font-family: 'Bebas Neue', cursive; font-size: 1.8rem; letter-spacing: 2px;
-  background: linear-gradient(135deg, #cc88ff, #8844ff);
+  font-family: 'Exo 2', sans-serif; font-size: 1.7rem; font-weight: 900; letter-spacing: 1px;
+  background: linear-gradient(135deg, #f5c842, #cc88ff, #8844ff);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .crystal-sub {
-  color: rgba(255,255,255,0.35); font-size: .8rem; margin-bottom: 6px; line-height: 1.5;
+  color: rgba(255,255,255,0.45); font-size: .82rem; margin-bottom: 8px; line-height: 1.6;
 }
 .crystal-promo {
-  display: inline-block; margin-bottom: 24px;
-  font-size: .72rem; font-weight: 700; letter-spacing: 2px;
-  color: #cc88ff; text-transform: uppercase;
-  background: rgba(180,100,255,0.07);
-  border: 1px solid rgba(180,100,255,0.2);
-  padding: 6px 16px; border-radius: 20px;
+  display: inline-flex; align-items: center; gap: 6px; margin-bottom: 24px;
+  font-size: .75rem; font-weight: 700; letter-spacing: 1px;
+  color: #e0aaff; text-transform: uppercase;
+  background: rgba(180,100,255,0.1);
+  border: 1px solid rgba(180,100,255,0.3);
+  padding: 7px 18px; border-radius: 20px;
+  box-shadow: 0 0 12px rgba(180,100,255,0.1);
+}
+
+/* stats row */
+.crystal-stats {
+  display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;
+}
+.crystal-stat {
+  flex: 1; background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 12px 8px;
+}
+.crystal-stat-val {
+  font-family: 'Bebas Neue', cursive; font-size: 1.6rem; letter-spacing: 1px;
+  color: #cc88ff; text-shadow: 0 0 16px rgba(180,100,255,0.5);
+  display: block; line-height: 1;
+}
+.crystal-stat-lbl {
+  font-size: .62rem; font-weight: 700; letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.3); text-transform: uppercase; margin-top: 4px; display: block;
+}
+
+/* stats row */
+.crystal-stats {
+  display: flex; gap: 10px; justify-content: center; margin-bottom: 16px;
+}
+.crystal-stat {
+  flex: 1; background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(180,100,255,0.18);
+  border-radius: 14px; padding: 14px 8px;
+  transition: border-color .2s;
+}
+.crystal-stat:hover { border-color: rgba(200,130,255,0.35); }
+.crystal-stat-val {
+  font-family: 'Bebas Neue', cursive; font-size: 1.7rem; letter-spacing: 1px;
+  color: #dd99ff; text-shadow: 0 0 16px rgba(180,100,255,0.5);
+  display: block; line-height: 1;
+}
+.crystal-stat-lbl {
+  font-size: .62rem; font-weight: 700; letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.3); text-transform: uppercase; margin-top: 5px; display: block;
 }
 
 /* counter */
 .counter-wrap {
   display: flex; align-items: center; justify-content: center; gap: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 .counter-box {
-  background: rgba(180,100,255,0.08);
-  border: 1px solid rgba(180,100,255,0.2);
-  border-radius: 12px; padding: 10px 24px;
-  font-family: 'Bebas Neue', cursive; font-size: 2.4rem; letter-spacing: 2px;
-  color: #cc88ff; text-shadow: 0 0 20px rgba(180,100,255,0.5);
-  min-width: 120px;
+  background: linear-gradient(135deg, rgba(120,40,220,0.2), rgba(60,10,100,0.3));
+  border: 1px solid rgba(180,100,255,0.35);
+  border-radius: 16px; padding: 14px 32px;
+  font-family: 'Bebas Neue', cursive; font-size: 3rem; letter-spacing: 2px;
+  color: #dd99ff; text-shadow: 0 0 24px rgba(180,100,255,0.6);
+  min-width: 160px;
+  box-shadow: 0 4px 24px rgba(120,40,220,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
 }
-.counter-label { color: rgba(255,255,255,0.3); font-size: .7rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; }
+.counter-label { color: rgba(255,255,255,0.3); font-size: .68rem; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; margin-bottom: 18px; }
 
 .gem-progress {
   background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(180,100,255,0.15);
-  border-radius: 8px; height: 8px; margin-bottom: 6px;
+  border: 1px solid rgba(180,100,255,0.12);
+  border-radius: 10px; height: 10px; margin-bottom: 6px;
   overflow: hidden;
 }
 .gem-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #8844ff, #cc88ff);
-  border-radius: 8px;
+  background: linear-gradient(90deg, #6622cc, #cc88ff, #f5c842);
+  border-radius: 10px;
   transition: width .3s ease;
-  box-shadow: 0 0 8px rgba(180,100,255,0.5);
+  box-shadow: 0 0 10px rgba(180,100,255,0.6);
 }
 .gem-progress-label {
-  font-size: .68rem; color: rgba(255,255,255,0.3);
-  letter-spacing: 2px; margin-bottom: 24px;
+  font-size: .7rem; color: rgba(255,255,255,0.3);
+  letter-spacing: 1px; margin-bottom: 16px;
 }
 .gem-earned {
-  font-family: 'Bebas Neue', cursive; font-size: 1.1rem; letter-spacing: 3px;
-  color: #cc88ff; margin-bottom: 24px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px;
+  color: #f5c842; margin-bottom: 24px;
+  background: rgba(245,200,66,0.08);
+  border: 1px solid rgba(245,200,66,0.2);
+  border-radius: 12px; padding: 10px 24px;
+  box-shadow: 0 0 16px rgba(245,200,66,0.08);
 }
 
 /* crystal button */
-.crystal-btn-wrap { position: relative; display: inline-block; margin-bottom: 20px; }
+.crystal-btn-wrap { position: relative; display: inline-block; margin-bottom: 24px; }
 .crystal-btn {
-  width: 130px; height: 130px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ee88ff, #8833dd 50%, #330066);
-  border: 3px solid rgba(200,120,255,0.5);
-  box-shadow: 0 0 30px rgba(150,60,255,0.5), 0 0 60px rgba(150,60,255,0.2), inset 0 2px 0 rgba(255,255,255,0.3);
+  width: 150px; height: 150px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ee88ff, #8833dd 50%, #2a0055);
+  border: 3px solid rgba(220,140,255,0.6);
+  box-shadow: 0 0 40px rgba(150,60,255,0.6), 0 0 80px rgba(150,60,255,0.2), 0 8px 32px rgba(0,0,0,0.5), inset 0 2px 0 rgba(255,255,255,0.35);
   cursor: pointer; position: relative; overflow: hidden;
   transition: transform .1s, box-shadow .2s;
   display: -webkit-flex; display: flex; align-items: center; justify-content: center;
-  font-size: 3.5rem;
+  font-size: 4rem;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   touch-action: manipulation;
   user-select: none; -webkit-user-select: none;
 }
 .crystal-btn:hover {
-  box-shadow: 0 0 40px rgba(180,80,255,0.7), 0 0 80px rgba(150,60,255,0.3), inset 0 2px 0 rgba(255,255,255,0.3);
+  box-shadow: 0 0 60px rgba(180,80,255,0.8), 0 0 100px rgba(150,60,255,0.35), inset 0 2px 0 rgba(255,255,255,0.35);
+  transform: scale(1.04);
 }
-.crystal-btn:active { transform: scale(.92); }
-.crystal-btn.disabled { filter: grayscale(1); opacity: .5; cursor: not-allowed; }
+.crystal-btn:active { transform: scale(.90); }
+.crystal-btn.disabled { filter: grayscale(1); opacity: .4; cursor: not-allowed; }
 .crystal-btn::before {
   content: '';
   position: absolute; top: 12%; left: 18%; width: 30%; height: 20%;
@@ -530,17 +760,18 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
 
 /* save button */
 .save-btn {
-  width: 100%; padding: 14px;
-  font-family: 'Bebas Neue', cursive; font-size: 1rem; letter-spacing: 5px;
-  color: #fff;
-  background: transparent;
-  border: 1px solid rgba(180,100,255,0.35); border-radius: 10px;
+  width: 100%; padding: 16px;
+  font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px;
+  color: #e0aaff;
+  background: linear-gradient(135deg, rgba(120,40,220,0.25), rgba(80,10,150,0.35));
+  border: 1px solid rgba(180,100,255,0.45); border-radius: 14px;
   cursor: pointer; position: relative; overflow: hidden;
-  transition: border-color .2s, background .2s, transform .1s;
+  transition: border-color .2s, background .2s, transform .1s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(120,40,220,0.2);
 }
-.save-btn:hover { border-color: rgba(180,100,255,0.7); background: rgba(180,100,255,0.08); transform: translateY(-1px); }
+.save-btn:hover { border-color: rgba(200,130,255,0.8); background: linear-gradient(135deg, rgba(140,60,240,0.35), rgba(100,20,180,0.45)); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(150,60,255,0.35); }
 .save-btn:active { transform: translateY(1px); }
-.save-btn:disabled { opacity: .4; cursor: not-allowed; }
+.save-btn:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
 
 .deadline-note {
   margin-top: 16px;
@@ -721,11 +952,11 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
   background: linear-gradient(90deg, transparent, rgba(245,200,66,0.3), transparent);
 }
 .chests-divider span {
-  font-family: 'Bebas Neue', cursive; font-size: .8rem; letter-spacing: 5px;
-  color: rgba(245,200,66,0.5); white-space: nowrap;
+  font-family: 'Exo 2', sans-serif; font-size: .85rem; font-weight: 700; letter-spacing: 2px;
+  color: rgba(245,200,66,0.7); white-space: nowrap;
 }
 .chests-title {
-  font-family: 'Bebas Neue', cursive; font-size: 2rem; letter-spacing: 3px;
+  font-family: 'Exo 2', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: 1px;
   color: #fff; margin-bottom: 6px;
 }
 .chests-sub {
@@ -784,7 +1015,7 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
 .chest-img { width: 100%; height: 100%; object-fit: contain; }
 
 .chest-name {
-  font-family: 'Bebas Neue', cursive; font-size: 1rem; letter-spacing: 2px;
+  font-family: 'Exo 2', sans-serif; font-size: .95rem; font-weight: 700; letter-spacing: 1px;
   color: #fff; margin-bottom: 6px;
 }
 .chest-price {
@@ -904,6 +1135,15 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 18px;
   padding: 28px 24px 24px;
+}
+.lb-section-title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 18px;
 }
 .lb-tabs {
   display: flex;
@@ -1123,24 +1363,67 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
 <div class="wrap">
   <div class="crystal-divider"><span>💎 Акция · Кристальный тап ✦</span></div>
 
-  <div class="crystal-section" id="crystal-section">
-    <div class="crystal-title" id="crystal-title">Кристальный тап</div>
-    <p class="crystal-sub" id="crystal-sub">Тапай кристалл и зарабатывай гемы для старта в игре!<br><span id="crystal-sub-rate">Каждые 100 кликов = 5 гемов 💎</span></p>
-    <div class="crystal-promo" id="crystal-promo">⏰ Акция до 8 марта 20:00 по Калининграду</div>
+  <!-- ЭКРАН ОЖИДАНИЯ (показывается до 13:00 МСК 9 марта) -->
+  <div class="crystal-section" id="crystal-waiting" style="display:none;">
+    <div class="crystal-title">💎 Кристальный тап 2.0</div>
+    <p class="crystal-sub">Переработанная акция с новыми возможностями!</p>
+    <div class="crystal-promo" id="waiting-promo">⏰ Начнётся 9 марта в 13:00 по Москве</div>
 
-    <div class="counter-wrap">
-      <div class="counter-box" id="tap-count">0</div>
+    <div style="margin: 24px 0 28px; padding: 20px; background: rgba(180,100,255,0.06); border: 1px solid rgba(180,100,255,0.2); border-radius: 16px;">
+      <div style="font-size: 2.8rem; margin-bottom: 10px;">🔒</div>
+      <div style="font-family:'Exo 2',sans-serif; font-size: 1.1rem; font-weight: 700; color: #e0aaff; margin-bottom: 8px;">Акция ещё не началась</div>
+      <div style="color: rgba(255,255,255,0.4); font-size: .82rem; line-height: 1.6;">Возвращайся 9 марта в 13:00 по Москве<br>и первым начни зарабатывать гемы!</div>
     </div>
-    <div class="counter-label" id="tap-max-label">/ 10 000 кликов</div>
+
+    <!-- Таймер обратного отсчёта до открытия -->
+    <div style="margin-bottom: 28px;">
+      <div style="font-size:.72rem; font-weight:700; letter-spacing:2px; color:rgba(255,255,255,0.3); text-transform:uppercase; margin-bottom:12px;">До начала акции</div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;" id="waiting-countdown">
+        <div class="cd-box"><span class="cd-num" id="wcd-h">00</span><span class="cd-label">Часов</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box"><span class="cd-num" id="wcd-m">00</span><span class="cd-label">Минут</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box"><span class="cd-num" id="wcd-s">00</span><span class="cd-label">Секунд</span></div>
+      </div>
+    </div>
+
+    <button class="btn-enter-crystal" id="btn-enter-crystal" onclick="tryEnterCrystal()" disabled>
+      <span class="btn-shine"></span>
+      🔒 Зайти в Кристальный тап
+    </button>
+    <div style="margin-top:10px; font-size:.72rem; color:rgba(255,255,255,0.25); letter-spacing:1px;" id="enter-note">Кнопка откроется в 13:00 по Москве</div>
+  </div>
+
+  <!-- ОСНОВНАЯ СЕКЦИЯ АКЦИИ -->
+  <div class="crystal-section" id="crystal-section" style="display:block;">
+    <div class="crystal-title" id="crystal-title">💎 Кристальный тап</div>
+    <p class="crystal-sub" id="crystal-sub">Тапай кристалл и зарабатывай гемы для старта в игре!<br><span id="crystal-sub-rate">Каждые 100 кликов = 2 гема 💎  |  редкий шанс X2!</span></p>
+    <div class="crystal-promo" id="crystal-promo">⏰ Акция до 13 марта 20:00 по Калининграду</div>
+
+    <!-- Stats row -->
+    <div class="crystal-stats">
+      <div class="crystal-stat">
+        <span class="crystal-stat-val" id="tap-count">0</span>
+        <span class="crystal-stat-lbl">Кликов</span>
+      </div>
+      <div class="crystal-stat">
+        <span class="crystal-stat-val" id="gems-count">0</span>
+        <span class="crystal-stat-lbl">💎 Гемов</span>
+      </div>
+      <div class="crystal-stat">
+        <span class="crystal-stat-val" id="tap-max-label-val">50к</span>
+        <span class="crystal-stat-lbl">Лимит</span>
+      </div>
+    </div>
+    <div class="counter-label" id="tap-max-label">/ 50 000 кликов</div>
 
     <div class="gem-progress">
       <div class="gem-progress-bar" id="gem-bar" style="width:0%"></div>
     </div>
-    <div class="gem-progress-label">До следующих <span id="next-gem-amount">5</span> гемов: <span id="next-gem">100</span> кликов</div>
-    <div class="gem-earned">💎 Заработано гемов: <span id="gems-count">0</span></div>
+    <div class="gem-progress-label">До следующих <span id="next-gem-amount">2</span> гемов: <span id="next-gem">100</span> кликов</div>
 
     <!-- X2 toast inside crystal -->
-    <div id="x2-toast" style="display:none;margin-bottom:10px;padding:8px 20px;background:linear-gradient(135deg,rgba(255,50,255,0.18),rgba(255,200,0,0.12));border:1px solid rgba(255,150,255,0.4);border-radius:20px;font-family:'Bebas Neue',cursive;font-size:1.1rem;letter-spacing:3px;color:#ff88ff;text-shadow:0 0 10px rgba(255,100,255,0.8);animation:fadeup .3s ease;">⚡ ВАМ ВЫПАЛ X2 КЛИК! ⚡</div>
+    <div id="x2-toast" style="display:none;margin-bottom:14px;padding:10px 22px;background:linear-gradient(135deg,rgba(255,50,255,0.2),rgba(255,200,0,0.14));border:1px solid rgba(255,150,255,0.5);border-radius:20px;font-family:'Exo 2',sans-serif;font-size:1rem;font-weight:800;letter-spacing:2px;color:#ff88ff;text-shadow:0 0 10px rgba(255,100,255,0.8);animation:fadeup .3s ease;">⚡ ВАМ ВЫПАЛ X2 КЛИК! ⚡</div>
 
     <div class="crystal-btn-wrap" id="crystal-wrap">
       <button class="crystal-btn" id="crystal-btn" onclick="tapCrystal(event)">💎</button>
@@ -1149,7 +1432,7 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
     <button class="save-btn" id="save-btn" onclick="saveProgress()">
       💾 Сохранить прогресс
     </button>
-    <div class="deadline-note" id="deadline-note">⏰ Акция действует до 8 марта 20:00 по Калининграду</div>
+    <div class="deadline-note" id="deadline-note">⏰ Акция действует до 13 марта 20:00 по Калининграду</div>
     <div class="saves-counter" id="saves-counter">
       <span class="saves-label">💾 Сохранений доступно:</span>
       <span class="saves-slots" id="saves-slots">
@@ -1160,8 +1443,42 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
       <span class="saves-num" id="saves-num">3 / 3</span>
     </div>
 
-    </div><!-- /crystal-section -->
+  </div><!-- /crystal-section -->
 </div><!-- /wrap -->
+
+<!-- МОДАЛЬНОЕ ОКНО НОВОВВЕДЕНИЙ -->
+<div class="whats-new-overlay" id="whats-new-modal">
+  <div class="whats-new-box">
+    <div class="whats-new-icon">🚀</div>
+    <div class="whats-new-title">Что нового в<br><span style="color:#f5c842">Кристальном тапе 2.0</span></div>
+    <div class="whats-new-list">
+      <div class="whats-new-item">
+        <div class="whats-new-num">1</div>
+        <div class="whats-new-text">
+          <div class="whats-new-item-title">⚡ Буст X2</div>
+          <div class="whats-new-item-desc">Новая переработанная акция! С шансом 0.1% может выпасть буст — <strong>x2 тапы на 15 секунд</strong></div>
+        </div>
+      </div>
+      <div class="whats-new-item">
+        <div class="whats-new-num">2</div>
+        <div class="whats-new-text">
+          <div class="whats-new-item-title">🏆 Ценный приз</div>
+          <div class="whats-new-item-desc">Теперь за <strong>50 000 тапов</strong> тебя ждёт ценный приз!</div>
+        </div>
+      </div>
+      <div class="whats-new-item">
+        <div class="whats-new-num">3</div>
+        <div class="whats-new-text">
+          <div class="whats-new-item-title">💎 Новые условия</div>
+          <div class="whats-new-item-desc">Теперь дают <strong>2 гема за каждые 100 тапов</strong> и всего <strong>3 сохранения</strong> прогресса — используй мудро!</div>
+        </div>
+      </div>
+    </div>
+    <button class="whats-new-btn" onclick="closeWhatsNew()">
+      💎 Понятно, поехали!
+    </button>
+  </div>
+</div>
 
 <div class="wrap" style="position:relative;z-index:2;">
   <div class="chests-section">
@@ -1250,13 +1567,13 @@ const MAX_TAPS_1  = 10000;
 const GEMS_PER_100_1 = 5;
 const MAX_SAVES_1 = 5; // старые сохранения
 
-// ── АКЦИЯ 2: с 8 марта 21:00 КЛД (19:00 UTC) до 13 марта 20:00 КЛД (18:00 UTC)
-const TAP_START_2 = new Date('2026-03-08T18:00:00Z');
+// ── АКЦИЯ 2: с 9 марта 13:00 МСК (10:00 UTC) до 13 марта 20:00 КЛД (18:00 UTC)
+const TAP_START_2 = new Date('2026-03-09T10:00:00Z'); // 13:00 МСК
 const TAP_END_2   = new Date('2026-03-13T18:00:00Z');
 const MAX_TAPS_2  = 50000;
 const GEMS_PER_100_2 = 2;
 const MAX_SAVES_2 = 3;
-const X2_CHANCE   = 0.0001; // 0.01%
+const X2_CHANCE   = 0.001; // 0.1% — примерно раз в 1000 кликов
 
 // Определяем текущую фазу
 function getPhase() {
@@ -1288,7 +1605,7 @@ function initPhaseUI() {
 
   if (ph === 2) {
     document.getElementById('crystal-title').textContent = 'Мега Тап 2.0';
-    sub.textContent   = 'Каждые 100 кликов = 2 гема 💎  |  0.01% шанс X2 клика!';
+    sub.textContent   = 'Каждые 100 кликов = 2 гема 💎  |  редкий шанс X2 клика!';
     maxLbl.textContent = '/ 50 000 кликов';
     promo.textContent = '⏰ Акция до 13 марта 20:00 по Калининграду';
     promo.classList.add('phase2');
@@ -1296,15 +1613,109 @@ function initPhaseUI() {
     // кнопка кристалла — радуга
     document.getElementById('crystal-btn').classList.add('rainbow-mode');
   } else if (ph === 1) {
-    sub.textContent   = 'Каждые 100 кликов = 5 гемов 💎';
-    maxLbl.textContent = '/ 10 000 кликов';
-    promo.textContent = '⏰ Акция до 8 марта 20:00 по Калининграду';
-    note.textContent  = '⏰ Акция действует до 8 марта 20:00 по Калининграду';
+    sub.textContent   = 'Каждые 100 кликов = 2 гема 💎';
+    maxLbl.textContent = '/ 50 000 кликов';
+    promo.textContent = '⏰ Акция до 13 марта 20:00 по Калининграду';
+    note.textContent  = '⏰ Акция действует до 13 марта 20:00 по Калининграду';
   } else {
     // между акциями
-    note.textContent = '⏳ Следующая акция начнётся 8 марта в 21:00 по Калининграду';
+    note.textContent = '⏳ Следующая акция действует до 13 марта 20:00 по Калининграду';
   }
   document.getElementById('next-gem-amount').textContent = getGemsRate();
+}
+
+// ── WAITING SCREEN LOGIC ──
+const CRYSTAL_OPEN = new Date('2026-03-09T10:00:00Z'); // 13:00 МСК
+
+function isCrystalOpen() {
+  return new Date() >= CRYSTAL_OPEN;
+}
+
+function initCrystalVisibility() {
+  const now = new Date();
+  const waiting = document.getElementById('crystal-waiting');
+  const main    = document.getElementById('crystal-section');
+
+  if (isCrystalOpen()) {
+    // Акция открыта — показываем основную секцию
+    if (waiting) waiting.style.display = 'none';
+    if (main)    main.style.display = 'block';
+  } else {
+    // Ещё не открылась — показываем экран ожидания
+    if (waiting) waiting.style.display = 'block';
+    if (main)    main.style.display = 'none';
+    startWaitingCountdown();
+  }
+}
+
+function startWaitingCountdown() {
+  function tick() {
+    const diff = CRYSTAL_OPEN - new Date();
+    if (diff <= 0) {
+      // Время пришло — переключаем UI
+      clearInterval(waitTimer);
+      unlockCrystalBtn();
+      return;
+    }
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    const wh = document.getElementById('wcd-h');
+    const wm = document.getElementById('wcd-m');
+    const ws = document.getElementById('wcd-s');
+    if (wh) wh.textContent = String(h).padStart(2,'0');
+    if (wm) wm.textContent = String(m).padStart(2,'0');
+    if (ws) ws.textContent = String(s).padStart(2,'0');
+
+    // Разблокируем кнопку когда осталось 0
+    const btn = document.getElementById('btn-enter-crystal');
+    const note = document.getElementById('enter-note');
+    if (diff <= 0) {
+      unlockCrystalBtn();
+    }
+  }
+  tick();
+  const waitTimer = setInterval(tick, 1000);
+}
+
+function unlockCrystalBtn() {
+  const btn = document.getElementById('btn-enter-crystal');
+  const note = document.getElementById('enter-note');
+  if (btn) {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="btn-shine"></span>💎 Зайти в Кристальный тап';
+    btn.classList.add('unlocked');
+  }
+  if (note) note.textContent = '🎉 Акция началась! Нажми и начни тапать!';
+
+  // Через 3 сек автоматически переключаем на основную секцию
+  setTimeout(() => {
+    const waiting = document.getElementById('crystal-waiting');
+    const main    = document.getElementById('crystal-section');
+    if (waiting) waiting.style.display = 'none';
+    if (main)    main.style.display = 'block';
+    showWhatsNew();
+  }, 3000);
+}
+
+function tryEnterCrystal() {
+  if (!isCrystalOpen()) return;
+  const waiting = document.getElementById('crystal-waiting');
+  const main    = document.getElementById('crystal-section');
+  if (waiting) waiting.style.display = 'none';
+  if (main)    main.style.display = 'block';
+  showWhatsNew();
+}
+
+// Показываем модалку нововведений только один раз
+function showWhatsNew() {
+  if (localStorage.getItem('metik_whats_new_seen')) return;
+  document.getElementById('whats-new-modal').classList.add('show');
+}
+
+function closeWhatsNew() {
+  localStorage.setItem('metik_whats_new_seen', '1');
+  document.getElementById('whats-new-modal').classList.remove('show');
 }
 
 function showToast(msg) {
@@ -2173,6 +2584,7 @@ function confirmTg() {
 document.addEventListener('DOMContentLoaded', function() {
   initPhaseUI();
   loadLeaderboard();
+  initCrystalVisibility();
 
   (function checkTapDeadline() {
     const now = new Date();
