@@ -1331,7 +1331,6 @@ async function sendForm() {
   const btn   = document.getElementById('submit-btn');
   errEl.classList.remove('show');
 
-  alert('DEBUG: sendForm вызван\nИмя: ' + name + '\nEmail: ' + email + '\nTG: ' + tg);
 
   if (!name) { errEl.textContent = 'Введи своё имя'; errEl.classList.add('show'); return; }
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Введи корректный email'; errEl.classList.add('show'); return; }
@@ -2210,10 +2209,21 @@ function switchLbTab(tab) {
   loadLeaderboard();
 }
 
-// ── FIREBASE CONFIG ──
-// 👇 ЗАМЕНИ ЭТИ ЗНАЧЕНИЯ НА СВОИ (см. инструкцию ниже)
+// ══════════════════════════════════════════════════════════════
+// 🔥 FIREBASE — ЛИДЕРБОРД (общий для всех игроков)
+// ══════════════════════════════════════════════════════════════
+// КАК НАСТРОИТЬ (5 минут, бесплатно):
+//
+// 1. Зайди на https://console.firebase.google.com
+// 2. Нажми «Создать проект», дай любое название, отключи Google Analytics
+// 3. В левом меню выбери «Realtime Database» → «Создать базу данных»
+//    Выбери регион (europe-west1), режим «Тестовый» (Test mode)
+// 4. Скопируй URL базы — выглядит как:
+//    https://ИМЯ-ПРОЕКТА-default-rtdb.europe-west1.firebasedatabase.app
+// 5. Вставь его ниже вместо 'https://ТВОЙ-ПРОЕКТ...'
+// ══════════════════════════════════════════════════════════════
 const FIREBASE_URL = 'https://ТВОЙ-ПРОЕКТ-default-rtdb.firebaseio.com';
-// ──────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════
 
 async function updateLeaderboard() {
   const tg = localStorage.getItem('metik_saved_tg') || '';
