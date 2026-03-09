@@ -163,6 +163,140 @@ body {
 }
 @keyframes grid-drift { from{transform:translateY(0)} to{transform:translateY(60px)} }
 
+/* ── INVENTORY ── */
+.inventory-section {
+  width: 100%; margin-top: 22px;
+  background: linear-gradient(160deg, rgba(30,0,50,0.7) 0%, rgba(10,0,30,0.85) 100%);
+  border: 1.5px solid rgba(180,80,255,0.3);
+  border-radius: 20px;
+  padding: 28px 24px 32px;
+  box-shadow: 0 0 30px rgba(140,0,255,0.08), inset 0 0 40px rgba(0,0,0,0.2);
+  position: relative; overflow: hidden;
+  min-height: 340px;
+}
+.inventory-section::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(200,80,255,0.7), rgba(255,200,0,0.5), transparent);
+  border-radius: 20px 20px 0 0;
+}
+.inventory-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px;
+}
+.inventory-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.5rem; letter-spacing: 4px;
+  color: #fff;
+  display: flex; align-items: center; gap: 10px;
+}
+.inventory-title .inv-icon { font-size: 1.6rem; }
+.inventory-title .inv-accent { color: #f5c842; }
+.inv-count-badge {
+  font-family: 'Exo 2', sans-serif;
+  font-size: .78rem; font-weight: 800; letter-spacing: 1px;
+  color: #b060ff;
+  background: rgba(180,80,255,0.12);
+  border: 1px solid rgba(180,80,255,0.35);
+  border-radius: 20px; padding: 5px 14px;
+}
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.inv-slot {
+  aspect-ratio: 1;
+  min-height: 100px;
+  border-radius: 16px;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 7px;
+  position: relative; cursor: default;
+  transition: border-color .2s, transform .15s, box-shadow .2s;
+}
+.inv-slot.has-item {
+  border-color: rgba(200,80,255,0.55);
+  background: linear-gradient(145deg, rgba(160,30,255,0.13), rgba(255,180,0,0.07));
+  cursor: pointer;
+  animation: inv-glow 2.2s ease-in-out infinite alternate;
+}
+.inv-slot.has-item:active { transform: scale(0.93); }
+.inv-slot.has-item:hover {
+  transform: scale(1.06) translateY(-2px);
+  border-color: rgba(200,80,255,0.95);
+  box-shadow: 0 6px 24px rgba(180,60,255,0.35);
+}
+@keyframes inv-glow {
+  0%  { box-shadow: 0 0 10px rgba(180,60,255,0.25); }
+  100%{ box-shadow: 0 0 28px rgba(180,60,255,0.65), 0 0 50px rgba(255,180,0,0.15); }
+}
+.inv-item-icon {
+  font-size: 2.6rem; line-height: 1;
+  filter: drop-shadow(0 0 12px rgba(200,80,255,0.9));
+}
+.inv-item-label {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.1rem; letter-spacing: 3px;
+  color: #f5c842;
+  text-shadow: 0 0 10px rgba(245,200,66,0.8);
+  line-height: 1;
+}
+.inv-tap-hint {
+  position: absolute; bottom: 5px;
+  font-size: .55rem; letter-spacing: .5px;
+  color: rgba(255,255,255,0.3);
+  font-weight: 600; text-transform: uppercase;
+}
+.inv-empty-hint {
+  grid-column: 1 / -1;
+  font-size: .8rem; color: rgba(255,255,255,0.2);
+  font-style: italic; text-align: center; padding: 14px 0;
+  letter-spacing: 1px;
+}
+.inv-active-bar {
+  margin-top: 16px;
+  display: none;
+  align-items: center; gap: 12px;
+  background: linear-gradient(135deg,rgba(200,50,255,0.14),rgba(255,200,0,0.07));
+  border: 1px solid rgba(200,80,255,0.45);
+  border-radius: 12px; padding: 10px 16px;
+  font-size: .85rem; font-weight: 800; color: #cc66ff;
+  letter-spacing: 2px;
+}
+.inv-active-bar.show { display: flex; }
+.inv-active-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #cc66ff;
+  box-shadow: 0 0 8px #cc66ff;
+  animation: inv-dot-pulse 0.8s ease-in-out infinite alternate;
+  flex-shrink: 0;
+}
+@keyframes inv-dot-pulse {
+  0% { opacity: 0.5; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+.inv-timer-bar-wrap {
+  flex: 1; height: 6px; background: rgba(255,255,255,0.08);
+  border-radius: 4px; overflow: hidden;
+}
+.inv-timer-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #9900ff, #cc66ff, #f5c842);
+  border-radius: 4px;
+  transition: width .1s linear;
+  box-shadow: 0 0 8px rgba(180,60,255,0.6);
+}
+.inv-timer-label {
+  min-width: 36px; text-align: right;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1rem; color: #f5c842;
+  letter-spacing: 1px;
+}
+
+
 /* ── SCANLINES ── */
 .scanline {
   position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1; pointer-events: none;
@@ -1128,13 +1262,29 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
 }
 
 /* ── LEADERBOARD ── */
+/* ═══════════════════════════════════════════════
+   LEADERBOARD — REDESIGNED
+═══════════════════════════════════════════════ */
 .leaderboard-section {
   margin: 0 auto 40px;
-  max-width: 600px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 18px;
-  padding: 28px 24px 24px;
+  max-width: 640px;
+  background: linear-gradient(160deg, rgba(10,5,30,0.95) 0%, rgba(5,2,20,0.98) 100%);
+  border: 1px solid rgba(140,80,255,0.2);
+  border-radius: 24px;
+  padding: 32px 28px 28px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 4px 40px rgba(100,40,200,0.15),
+    0 0 80px rgba(80,20,180,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.leaderboard-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(140,80,255,0.6), rgba(245,200,66,0.5), rgba(140,80,255,0.6), transparent);
 }
 .lb-section-title {
   font-family: 'Exo 2', sans-serif;
@@ -1148,29 +1298,41 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
 .lb-tabs {
   display: flex;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 50px;
+  padding: 4px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 .lb-tab {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 20px;
-  color: rgba(255,255,255,0.6);
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  color: rgba(255,255,255,0.5);
   font-family: 'Exo 2', sans-serif;
   font-size: .85rem;
   font-weight: 600;
-  padding: 7px 20px;
+  padding: 8px 22px;
   cursor: pointer;
-  transition: all .2s;
+  transition: all .25s;
+  letter-spacing: .3px;
 }
 .lb-tab.active {
-  background: linear-gradient(135deg, #f5c842, #e8a820);
-  color: #02040c;
-  border-color: transparent;
+  background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(124,58,237,0.5);
 }
+.lb-tab:not(.active):hover { color: rgba(255,255,255,0.8); }
+
 .lb-table-wrap {
   overflow-x: auto;
-  border-radius: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
 }
 .lb-table {
   width: 100%;
@@ -1179,69 +1341,136 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
   font-size: .88rem;
 }
 .lb-table thead th {
-  background: rgba(255,255,255,0.06);
-  padding: 10px 14px;
+  background: rgba(120,60,220,0.12);
+  padding: 12px 16px;
   text-align: left;
-  color: rgba(255,255,255,0.5);
-  font-size: .78rem;
+  color: rgba(180,140,255,0.8);
+  font-size: .72rem;
   text-transform: uppercase;
-  letter-spacing: .5px;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(120,60,220,0.2);
 }
-.lb-table thead th:first-child { border-radius: 10px 0 0 0; }
-.lb-table thead th:last-child  { border-radius: 0 10px 0 0; text-align:right; }
+.lb-table thead th:first-child { border-radius: 15px 0 0 0; width: 48px; }
+.lb-table thead th:last-child  { border-radius: 0 15px 0 0; text-align:right; }
+
 .lb-table tbody tr {
   border-bottom: 1px solid rgba(255,255,255,0.04);
-  transition: background .15s;
+  transition: background .18s, transform .15s;
+  position: relative;
 }
-.lb-table tbody tr:hover { background: rgba(255,255,255,0.03); }
-.lb-table tbody tr.lb-me { background: rgba(245,200,66,0.08); }
+.lb-table tbody tr:last-child { border-bottom: none; }
+.lb-table tbody tr:hover {
+  background: rgba(140,80,255,0.07);
+  transform: translateX(2px);
+}
+.lb-table tbody tr.lb-me {
+  background: rgba(245,200,66,0.06);
+  border-left: 2px solid rgba(245,200,66,0.5);
+}
 .lb-table tbody td {
-  padding: 11px 14px;
-  color: rgba(255,255,255,0.85);
+  padding: 13px 16px;
+  color: rgba(255,255,255,0.82);
 }
-.lb-table tbody td:last-child { text-align:right; font-weight:700; color: #f5c842; }
-.lb-rank-1 td:first-child { color:#ffd700; font-size:1.1rem; }
-.lb-rank-2 td:first-child { color:#c0c0c0; font-size:1.05rem; }
-.lb-rank-3 td:first-child { color:#cd7f32; }
-.lb-myrank {
-  margin-top: 14px;
-  text-align: center;
-  font-size: .82rem;
-  color: rgba(255,255,255,0.45);
-  min-height: 20px;
+.lb-table tbody td:last-child {
+  text-align:right;
+  font-weight: 800;
+  font-size: .95rem;
+  color: #a78bfa;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .5px;
 }
-.lb-refresh-btn {
-  display: block;
-  margin: 16px auto 0;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 20px;
-  color: rgba(255,255,255,0.45);
-  font-family: 'Exo 2', sans-serif;
-  font-size: .78rem;
-  padding: 6px 18px;
-  cursor: pointer;
-  transition: all .2s;
-}
-.lb-refresh-btn:hover { border-color: rgba(255,255,255,0.35); color:rgba(255,255,255,0.7); }
-.lb-rank-1 { background: rgba(255,215,0,0.06) !important; }
-.lb-rank-2 { background: rgba(192,192,192,0.04) !important; }
-.lb-rank-3 { background: rgba(205,127,50,0.04) !important; }
+
+/* TOP-3 rows */
+.lb-rank-1 { background: linear-gradient(90deg, rgba(255,215,0,0.07), rgba(255,215,0,0.02)) !important; }
+.lb-rank-2 { background: linear-gradient(90deg, rgba(192,192,192,0.06), rgba(192,192,192,0.01)) !important; }
+.lb-rank-3 { background: linear-gradient(90deg, rgba(205,127,50,0.06), rgba(205,127,50,0.01)) !important; }
 .lb-rank-1 td, .lb-rank-2 td, .lb-rank-3 td { font-weight: 700; }
-.lb-table tbody td:nth-child(2) { color: rgba(255,255,255,0.9); }
-.lb-me td:nth-child(2) { color: #f5c842 !important; }
+
+/* Rank cell */
+.lb-table tbody td:first-child {
+  font-size: 1.2rem;
+  width: 48px;
+  text-align: center;
+}
+.lb-rank-1 td:last-child { color: #ffd700 !important; }
+.lb-rank-2 td:last-child { color: #c0c0c0 !important; }
+.lb-rank-3 td:last-child { color: #cd7f32 !important; }
+
+/* Player name cell */
+.lb-table tbody td:nth-child(2) { color: rgba(255,255,255,0.92); }
+.lb-me td:nth-child(2) { color: #f5c842 !important; font-weight: 700; }
+
+/* My rank bar */
+.lb-myrank {
+  margin-top: 16px;
+  text-align: center;
+  font-size: .83rem;
+  color: rgba(255,255,255,0.5);
+  min-height: 20px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Refresh button */
+.lb-refresh-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 16px auto 0;
+  background: rgba(124,58,237,0.12);
+  border: 1px solid rgba(124,58,237,0.3);
+  border-radius: 50px;
+  color: rgba(180,140,255,0.8);
+  font-family: 'Exo 2', sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  padding: 8px 22px;
+  cursor: pointer;
+  transition: all .22s;
+  letter-spacing: .3px;
+}
+.lb-refresh-btn:hover {
+  background: rgba(124,58,237,0.22);
+  border-color: rgba(124,58,237,0.6);
+  color: #c4b5fd;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(124,58,237,0.25);
+}
+.lb-refresh-btn:active { transform: translateY(0); }
+
 .lb-count {
   text-align: center;
   font-size: .75rem;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.2);
   margin-top: 10px;
 }
-@keyframes lb-fadein { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-#lb-body tr { animation: lb-fadein .2s ease both; }
+
+/* Row number badge for 4+ places */
+.lb-rank-num {
+  display: inline-block;
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 1px 7px;
+  font-size: .78rem;
+  color: rgba(255,255,255,0.45);
+  font-weight: 700;
+}
+
+@keyframes lb-fadein {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+#lb-body tr { animation: lb-fadein .25s ease both; }
 #lb-body tr:nth-child(1) { animation-delay: 0s; }
-#lb-body tr:nth-child(2) { animation-delay: .03s; }
-#lb-body tr:nth-child(3) { animation-delay: .06s; }
-#lb-body tr:nth-child(n+4) { animation-delay: .09s; }
+#lb-body tr:nth-child(2) { animation-delay: .05s; }
+#lb-body tr:nth-child(3) { animation-delay: .1s; }
+#lb-body tr:nth-child(4) { animation-delay: .13s; }
+#lb-body tr:nth-child(5) { animation-delay: .16s; }
+#lb-body tr:nth-child(n+6) { animation-delay: .18s; }
 
 </style>
 </head>
@@ -1444,6 +1673,26 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
     </div>
 
   </div><!-- /crystal-section -->
+
+  <!-- ИНВЕНТАРЬ БУСТОВ -->
+  <div class="inventory-section" id="inventory-section">
+    <div class="inventory-header">
+      <div class="inventory-title">
+        <span class="inv-icon">🎒</span>
+        ИНВЕНТАРЬ <span class="inv-accent">БУСТОВ</span>
+      </div>
+      <div class="inv-count-badge" id="inv-count-badge">0 бустов</div>
+    </div>
+    <div class="inventory-grid" id="inv-grid"></div>
+    <div class="inv-active-bar" id="inv-active-bar">
+      <div class="inv-active-dot"></div>
+      X2 АКТИВЕН
+      <div class="inv-timer-bar-wrap">
+        <div class="inv-timer-bar" id="inv-timer-bar" style="width:100%"></div>
+      </div>
+      <span class="inv-timer-label" id="inv-timer-label">15с</span>
+    </div>
+  </div>
 </div><!-- /wrap -->
 
 <!-- МОДАЛЬНОЕ ОКНО НОВОВВЕДЕНИЙ -->
@@ -1532,16 +1781,22 @@ footer { position: relative; z-index: 2; text-align: center; padding: 28px; colo
 <div class="wrap" style="position:relative;z-index:2;margin-bottom:40px;">
   <div class="leaderboard-section">
     <div class="chests-divider"><span>🏆 Таблица лидеров</span></div>
-    <p style="text-align:center;color:rgba(255,255,255,0.4);font-size:.82rem;margin:-8px 0 18px;">Топ игроков Metik Arena — обновляется при каждом сохранении</p>
+    <p style="text-align:center;color:rgba(180,140,255,0.5);font-size:.8rem;margin:-8px 0 20px;letter-spacing:.3px;">Топ игроков Metik Arena · обновляется при каждом сохранении</p>
     <div class="lb-tabs">
       <button class="lb-tab active" onclick="switchLbTab('taps')">⚡ По кликам</button>
       <button class="lb-tab" onclick="switchLbTab('gems')">💎 По гемам</button>
     </div>
     <div class="lb-table-wrap">
       <table class="lb-table" id="lb-table">
-        <thead><tr><th>#</th><th>Игрок</th><th id="lb-col-header">Клики</th></tr></thead>
+        <thead>
+          <tr>
+            <th style="text-align:center;">#</th>
+            <th>Игрок</th>
+            <th id="lb-col-header" style="text-align:right;">Клики</th>
+          </tr>
+        </thead>
         <tbody id="lb-body">
-          <tr><td colspan="3" style="text-align:center;padding:24px;color:rgba(255,255,255,0.4);">⏳ Загрузка…</td></tr>
+          <tr><td colspan="3" style="text-align:center;padding:28px;color:rgba(255,255,255,0.35);">⏳ Загрузка…</td></tr>
         </tbody>
       </table>
     </div>
@@ -1565,7 +1820,7 @@ const OPEN_DATE = new Date('2026-03-08T13:00:00Z');
 const TAP_END_1   = new Date('2026-03-08T18:00:00Z');
 const MAX_TAPS_1  = 10000;
 const GEMS_PER_100_1 = 5;
-const MAX_SAVES_1 = 5; // старые сохранения
+const MAX_SAVES_1 = 3;
 
 // ── АКЦИЯ 2: с 9 марта 13:00 МСК (10:00 UTC) до 13 марта 20:00 КЛД (18:00 UTC)
 const TAP_START_2 = new Date('2026-03-09T10:00:00Z'); // 13:00 МСК
@@ -2277,6 +2532,244 @@ function effectMegaUltra10000() {
   flashes.forEach((col,i)=>{ setTimeout(()=>flashScreen(col), i*170); });
 }
 
+function effect10kGuaranteed() {
+  // === PHASE 1: FLICKER (0–2s) — экран мигает ===
+  const flickerEl = document.createElement('div');
+  flickerEl.id = 'flicker-overlay';
+  flickerEl.style.cssText = `
+    position:fixed;top:0;left:0;right:0;bottom:0;z-index:9998;
+    background:#000;pointer-events:none;
+    animation:flicker10k 0.12s steps(1) infinite;
+  `;
+  document.body.appendChild(flickerEl);
+
+  // Создаём стиль мигания если нет
+  if (!document.getElementById('flicker10k-style')) {
+    const st = document.createElement('style');
+    st.id = 'flicker10k-style';
+    st.textContent = `
+      @keyframes flicker10k {
+        0%,100% { opacity:0.9; }
+        25% { opacity:0.1; }
+        50% { opacity:0.95; }
+        75% { opacity:0.05; }
+      }
+      #mega-fireworks-canvas {
+        position:fixed;top:0;left:0;z-index:9999;pointer-events:none;
+        width:100%;height:100%;
+      }
+      #dark10k-overlay {
+        position:fixed;top:0;left:0;right:0;bottom:0;z-index:9997;
+        background:radial-gradient(ellipse at 50% 50%, #0a0010 0%, #000000 100%);
+        pointer-events:none;
+        transition:opacity 2s ease;
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
+  // === PHASE 2: ПОСЛЕ МИГАНИЯ — чёрный фон + салюты (2s–47s) ===
+  setTimeout(() => {
+    // Убираем мигание
+    flickerEl.remove();
+
+    // Чёрный фон
+    const darkOverlay = document.createElement('div');
+    darkOverlay.id = 'dark10k-overlay';
+    document.body.appendChild(darkOverlay);
+
+    // Canvas для фейерверков
+    const fwCanvas = document.createElement('canvas');
+    fwCanvas.id = 'mega-fireworks-canvas';
+    fwCanvas.width = window.innerWidth;
+    fwCanvas.height = window.innerHeight;
+    document.body.appendChild(fwCanvas);
+    const fwCtx = fwCanvas.getContext('2d');
+
+    // Надпись 10 000
+    const label10k = document.createElement('div');
+    label10k.style.cssText = `
+      position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+      z-index:10000;pointer-events:none;text-align:center;
+      font-family:'Bebas Neue',cursive;
+      animation:label10kAnim 0.6s ease forwards;
+    `;
+    label10k.innerHTML = `
+      <div style="font-size:clamp(60px,14vw,130px);
+        background:linear-gradient(135deg,#f5c842,#ff2244,#00c8ff,#ff00ff,#00ff88);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        text-shadow:none;filter:drop-shadow(0 0 40px #f5c84280);
+        line-height:1;">10 000</div>
+      <div style="font-size:clamp(22px,5vw,52px);color:#fff;
+        letter-spacing:8px;text-shadow:0 0 30px #f5c842,0 0 60px #ff2244;
+        margin-top:10px;">ЛЕГЕНДА! 🏆</div>
+    `;
+    if (!document.getElementById('label10k-style')) {
+      const ls = document.createElement('style');
+      ls.id = 'label10k-style';
+      ls.textContent = `
+        @keyframes label10kAnim {
+          0% { opacity:0; transform:translate(-50%,-50%) scale(0.3); }
+          60% { opacity:1; transform:translate(-50%,-50%) scale(1.15); }
+          100% { opacity:1; transform:translate(-50%,-50%) scale(1); }
+        }
+      `;
+      document.head.appendChild(ls);
+    }
+    document.body.appendChild(label10k);
+
+    // Фейерверк — система частиц
+    const FW = [];
+    const fwColors = [
+      '#f5c842','#ff2244','#00c8ff','#ff00ff','#00ff88',
+      '#ffffff','#ff8800','#8800ff','#00ffff','#ffff00',
+      '#ff6688','#44ffcc','#ff4400','#aaff00'
+    ];
+
+    function spawnRocket() {
+      const x = 0.1*fwCanvas.width + Math.random()*0.8*fwCanvas.width;
+      const y = fwCanvas.height;
+      const targetY = 0.05*fwCanvas.height + Math.random()*0.55*fwCanvas.height;
+      const color = fwColors[Math.floor(Math.random()*fwColors.length)];
+      FW.push({ type:'rocket', x, y, targetY, vx:(Math.random()-.5)*3, vy:-14-Math.random()*8, color, trail:[] });
+    }
+
+    function explode(x, y, color) {
+      const count = 80 + Math.floor(Math.random()*80);
+      const shapes = ['star','spark','ring'];
+      for(let i=0;i<count;i++){
+        const angle = Math.random()*Math.PI*2;
+        const speed = 1.5 + Math.random()*9;
+        const c = Math.random()<0.2 ? fwColors[Math.floor(Math.random()*fwColors.length)] : color;
+        FW.push({
+          type: shapes[Math.floor(Math.random()*shapes.length)],
+          x, y,
+          vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed,
+          color:c, size:1.5+Math.random()*4,
+          life:1, decay:0.012+Math.random()*0.018,
+          gravity:0.07, friction:0.97
+        });
+      }
+      // кольца
+      for(let r=0;r<3;r++){
+        FW.push({
+          type:'ring-expand', x, y,
+          radius:5, maxRadius:60+r*40,
+          color, life:1, decay:0.025+r*0.01
+        });
+      }
+    }
+
+    // Запуск ракет с интервалом
+    let rocketInterval = setInterval(()=>{
+      const n = 1 + Math.floor(Math.random()*3);
+      for(let i=0;i<n;i++) setTimeout(spawnRocket, i*120);
+    }, 400);
+
+    // Рендер фейерверков
+    let fwRunning = true;
+    function fwLoop() {
+      if (!fwRunning) return;
+      // полупрозрачная заливка для следа
+      fwCtx.fillStyle = 'rgba(0,0,0,0.18)';
+      fwCtx.fillRect(0,0,fwCanvas.width,fwCanvas.height);
+
+      for(let i=FW.length-1;i>=0;i--){
+        const p = FW[i];
+
+        if (p.type==='rocket') {
+          p.trail.push({x:p.x,y:p.y});
+          if(p.trail.length>12) p.trail.shift();
+          p.x += p.vx; p.y += p.vy; p.vy += 0.3;
+          // Рисуем след
+          p.trail.forEach((pt,ti)=>{
+            const a = (ti/p.trail.length)*0.7;
+            fwCtx.beginPath();
+            fwCtx.arc(pt.x,pt.y,2*(ti/p.trail.length),0,Math.PI*2);
+            fwCtx.fillStyle = p.color + Math.floor(a*255).toString(16).padStart(2,'0');
+            fwCtx.fill();
+          });
+          // Ракета
+          fwCtx.beginPath();
+          fwCtx.arc(p.x,p.y,3,0,Math.PI*2);
+          fwCtx.fillStyle = p.color;
+          fwCtx.shadowBlur=15; fwCtx.shadowColor=p.color;
+          fwCtx.fill(); fwCtx.shadowBlur=0;
+          // Взрыв
+          if (p.y <= p.targetY) { explode(p.x,p.y,p.color); FW.splice(i,1); }
+
+        } else if (p.type==='ring-expand') {
+          p.radius += 6; p.life -= p.decay;
+          if(p.life<=0){FW.splice(i,1);continue;}
+          fwCtx.beginPath();
+          fwCtx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+          fwCtx.strokeStyle = p.color;
+          fwCtx.lineWidth=2;
+          fwCtx.globalAlpha=p.life*0.6;
+          fwCtx.shadowBlur=12; fwCtx.shadowColor=p.color;
+          fwCtx.stroke();
+          fwCtx.globalAlpha=1; fwCtx.shadowBlur=0;
+
+        } else {
+          p.vx *= p.friction; p.vy *= p.friction; p.vy += p.gravity;
+          p.x += p.vx; p.y += p.vy;
+          p.life -= p.decay;
+          if(p.life<=0){FW.splice(i,1);continue;}
+          fwCtx.globalAlpha = p.life;
+          fwCtx.shadowBlur=10; fwCtx.shadowColor=p.color;
+          if(p.type==='spark'){
+            fwCtx.strokeStyle=p.color; fwCtx.lineWidth=p.size*0.4;
+            fwCtx.beginPath();
+            fwCtx.moveTo(p.x,p.y);
+            fwCtx.lineTo(p.x-p.vx*5,p.y-p.vy*5);
+            fwCtx.stroke();
+          } else {
+            fwCtx.fillStyle=p.color;
+            fwCtx.beginPath();
+            fwCtx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);
+            fwCtx.fill();
+          }
+          fwCtx.globalAlpha=1; fwCtx.shadowBlur=0;
+        }
+      }
+      requestAnimationFrame(fwLoop);
+    }
+    fwLoop();
+
+    // Вспышки экрана каждые ~3 сек
+    let flashInterval = setInterval(()=>{
+      const col = fwColors[Math.floor(Math.random()*fwColors.length)];
+      const fl = document.createElement('div');
+      fl.style.cssText = `position:fixed;top:0;left:0;right:0;bottom:0;z-index:9996;pointer-events:none;
+        background:${col}22;animation:none;`;
+      document.body.appendChild(fl);
+      setTimeout(()=>fl.remove(),300);
+    },2800);
+
+    // === КОНЕЦ через 45 секунд ===
+    setTimeout(()=>{
+      fwRunning = false;
+      clearInterval(rocketInterval);
+      clearInterval(flashInterval);
+
+      // Фейд аут
+      darkOverlay.style.opacity='0';
+      fwCanvas.style.transition='opacity 2s';
+      fwCanvas.style.opacity='0';
+      label10k.style.transition='opacity 1.5s';
+      label10k.style.opacity='0';
+
+      setTimeout(()=>{
+        darkOverlay.remove();
+        fwCanvas.remove();
+        label10k.remove();
+        fwCtx.clearRect(0,0,fwCanvas.width,fwCanvas.height);
+      }, 2000);
+    }, 45000);
+
+  }, 2000); // после 2 секунд мигания
+}
+
 function flashScreen(color) {
   const fl = document.getElementById('milestone-flash');
   fl.style.background = color;
@@ -2313,6 +2806,67 @@ if (tapCount >= getMaxTaps()) {
 // X2 режим
 let x2Active = false;
 let x2Timer  = null;
+let x2Inventory = parseInt(localStorage.getItem('metik_x2_inv') || '0'); // кол-во бустов в инвентаре
+const X2_DURATION = 15000; // 15 сек
+
+function saveX2Inv() {
+  localStorage.setItem('metik_x2_inv', x2Inventory);
+}
+
+function renderInventory() {
+  const grid = document.getElementById('inv-grid');
+  const badge = document.getElementById('inv-count-badge');
+  if (!grid) return;
+  grid.innerHTML = '';
+  if (badge) badge.textContent = x2Inventory + (x2Inventory === 1 ? ' буст' : x2Inventory >= 2 && x2Inventory <= 4 ? ' буста' : ' бустов');
+
+  const MAX_SLOTS = 6;
+  const showSlots = Math.max(MAX_SLOTS, x2Inventory);
+  for (let i = 0; i < showSlots; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'inv-slot' + (i < x2Inventory ? ' has-item' : '');
+    if (i < x2Inventory) {
+      slot.innerHTML = `
+        <span class="inv-item-icon">⚡</span>
+        <span class="inv-item-label">X2</span>
+        <span class="inv-tap-hint">нажми</span>
+      `;
+      slot.title = 'Нажми чтобы активировать X2 на 15 секунд';
+      slot.onclick = () => useX2Boost();
+    }
+    grid.appendChild(slot);
+  }
+
+  if (x2Inventory === 0) {
+    const hint = document.createElement('div');
+    hint.className = 'inv-empty-hint';
+    hint.textContent = '✦ бусты падают случайно во время тапа ✦';
+    grid.appendChild(hint);
+  }
+}
+
+function useX2Boost() {
+  if (x2Active) { showToast('⚡ X2 уже активен!'); return; }
+  if (x2Inventory <= 0) return;
+  x2Inventory--;
+  saveX2Inv();
+  renderInventory();
+  activateX2();
+}
+
+function addX2ToInventory() {
+  x2Inventory++;
+  saveX2Inv();
+  renderInventory();
+  showToast('⚡ Буст X2 упал в инвентарь! Активируй когда захочешь!');
+  // подсветка инвентаря
+  const sec = document.getElementById('inventory-section');
+  if (sec) {
+    sec.style.transition = 'box-shadow .2s';
+    sec.style.boxShadow = '0 0 30px rgba(255,100,255,0.6)';
+    setTimeout(() => { sec.style.boxShadow = ''; }, 1200);
+  }
+}
 
 function activateX2() {
   x2Active = true;
@@ -2321,6 +2875,25 @@ function activateX2() {
   const btn = document.getElementById('crystal-btn');
   btn.classList.add('rainbow-mode');
   btn.textContent = '💥';
+
+  // таймер-бар
+  const bar = document.getElementById('inv-active-bar');
+  const timerBar = document.getElementById('inv-timer-bar');
+  const timerLabel = document.getElementById('inv-timer-label');
+  if (bar) bar.classList.add('show');
+  const start = Date.now();
+  const total = X2_DURATION;
+  function tickBar() {
+    if (!x2Active) return;
+    const elapsed = Date.now() - start;
+    const pct = Math.max(0, 100 - (elapsed / total * 100));
+    const secsLeft = Math.ceil((total - elapsed) / 1000);
+    if (timerBar) timerBar.style.width = pct + '%';
+    if (timerLabel) timerLabel.textContent = secsLeft + 'с';
+    if (elapsed < total) requestAnimationFrame(tickBar);
+  }
+  tickBar();
+
   if (x2Timer) clearTimeout(x2Timer);
   x2Timer = setTimeout(() => {
     x2Active = false;
@@ -2329,7 +2902,8 @@ function activateX2() {
     btn.classList.remove('rainbow-mode');
     btn.textContent = '💎';
     if (currentPhase === 2) btn.classList.add('rainbow-mode');
-  }, 15000);
+    if (bar) bar.classList.remove('show');
+  }, X2_DURATION);
 }
 
 function tapCrystal(e) {
@@ -2363,14 +2937,17 @@ function tapCrystal(e) {
     return;
   }
 
-  // X2 шанс (только фаза 2)
+  // X2 шанс (только фаза 2) — падает в инвентарь
   let addCount = 1;
-  if (ph === 2 && !x2Active && Math.random() < X2_CHANCE) {
-    activateX2();
+  if (ph === 2 && Math.random() < X2_CHANCE) {
+    addX2ToInventory();
   }
   if (x2Active && ph === 2) {
     addCount = 2;
   }
+
+  // x10 — каждый тап даёт 10 в фазе 2
+  if (ph === 2) addCount *= 10;
 
   tapCount += addCount;
   localStorage.setItem(getTapKey(), tapCount);
@@ -2386,12 +2963,12 @@ function tapCrystal(e) {
   btn.appendChild(ripple);
   setTimeout(() => ripple.remove(), 700);
 
-  // float +1 / +2
+  // float +10 / +20
   const wrap = document.getElementById('crystal-wrap');
   const float = document.createElement('div');
   float.className = 'crystal-float';
-  float.textContent = addCount === 2 ? '+2 ✨' : '+1';
-  if (addCount === 2) float.style.color = '#ffdd00';
+  float.textContent = ph === 2 ? (addCount === 20 ? '+20 ✨' : '+10 ⚡') : (addCount === 2 ? '+2 ✨' : '+1');
+  if (ph === 2) float.style.color = '#f5c842';
   const ox = -20 + Math.random() * 40;
   float.style.cssText += `left:calc(50% + ${ox}px);top:0;`;
   wrap.appendChild(float);
@@ -2428,6 +3005,8 @@ function tapCrystal(e) {
     setTimeout(() => { playMilestoneSound(1000); effectEpicExplosion1000(); showToast('🔥 1000 кликов! ЭПИЧНО!'); }, 50);
   } else if (tapCount === 5000 && currentPhase === 2) {
     setTimeout(() => { playMilestoneSound(1000); effect5000(); showToast('⚡ 5 000 кликов! Красавчик!'); }, 50);
+  } else if (tapCount === 10000 && currentPhase === 2) {
+    setTimeout(() => { playMilestoneSound(10000); effect10kGuaranteed(); showToast('🏆 10 000 кликов! ТЫ ЛЕГЕНДА!'); }, 50);
   } else if (tapCount === 25000 && currentPhase === 2) {
     setTimeout(() => { playMilestoneSound(10000); effect25000(); showToast('🏆 25 000 кликов! МЕГA!'); }, 50);
   } else if (tapCount >= maxT) {
@@ -2585,6 +3164,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initPhaseUI();
   loadLeaderboard();
   initCrystalVisibility();
+  renderInventory();
 
   (function checkTapDeadline() {
     const now = new Date();
@@ -2693,14 +3273,19 @@ function renderLeaderboard(entries) {
   }
   tbody.innerHTML = entries.map((e, i) => {
     const rank = i + 1;
-    const rankStr = medals[i] !== undefined ? medals[i] : rank;
+    const rankStr = medals[i] !== undefined
+      ? medals[i]
+      : '<span class="lb-rank-num">' + rank + '</span>';
     const isMe = myTg && e.tg === myTg;
-    const val = field === 'taps' ? (e.taps || 0).toLocaleString('ru') : (e.gems || 0).toLocaleString('ru');
+    const val = field === 'taps'
+      ? (e.taps || 0).toLocaleString('ru') + ' <span style="font-size:.7rem;opacity:.5;font-weight:400;">тапов</span>'
+      : (e.gems || 0).toLocaleString('ru') + ' <span style="font-size:.7rem;opacity:.5;font-weight:400;">💎</span>';
     const rankClass = rank <= 3 ? ' lb-rank-' + rank : '';
     return '<tr class="' + rankClass + (isMe ? ' lb-me' : '') + '">' +
-      '<td>' + rankStr + '</td>' +
+      '<td style="text-align:center;">' + rankStr + '</td>' +
       '<td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' +
-        (isMe ? '⭐ ' : '') + escapeHtml(e.tg || '?') +
+        (isMe ? '<span style="color:#f5c842;margin-right:4px;">★</span>' : '') +
+        escapeHtml(e.tg || '?') +
       '</td>' +
       '<td>' + val + '</td></tr>';
   }).join('');
@@ -2715,6 +3300,429 @@ function renderLeaderboard(entries) {
 function escapeHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
+
+// ══════════════════════════════════════════════════════
+// 🎉 EVENT SYSTEM — Ивент 16:00–16:15
+// ══════════════════════════════════════════════════════
+
+(function() {
+
+  // ── CONFIG ──
+  // Ивент каждый день в 16:00 по локальному времени браузера
+  const EVT_HOUR   = 16;
+  const EVT_MIN    = 0;
+  const EVT_SEC    = 0;
+  const EVT_DURATION_SEC = 15 * 60; // 15 минут
+
+  // Фазы буста (секунды от старта эвента)
+  // 16:00:00 старт музыки + радуга
+  // 16:01:28 (88 сек) — x2, 3 минуты (до 16:04:28 = 268 сек)
+  // 16:04:28 (268 сек) — x5, 6 минут (до 16:10:28 = 628 сек)
+  // 16:10:28 (628 сек) — x10, 5 минут (до 16:15:00 = 900 сек)
+  const PHASES = [
+    { start: 88,  end: 268, mult: 2  },
+    { start: 268, end: 628, mult: 5  },
+    { start: 628, end: 900, mult: 10 },
+  ];
+
+  // ── STATE ──
+  let evtState   = 'idle';  // idle | notif | event | done
+  let evtStartTs = 0;
+  let evtTick    = null;
+  let audioUrl   = null;
+  let currentMult = 0;
+  let fwAnimId   = null;
+  let fwParticles = [];
+
+  // ── HELPERS ──
+  function getNextEventStart() {
+    const now = new Date();
+    const t = new Date(now);
+    t.setHours(EVT_HOUR, EVT_MIN, EVT_SEC, 0);
+    return t;
+  }
+
+  function getSecondsUntilEvent() {
+    return (getNextEventStart() - new Date()) / 1000;
+  }
+
+  // ── DOM refs ──
+  const overlay     = document.getElementById('evt-overlay');
+  const bgRainbow   = document.getElementById('evt-bg-rainbow');
+  const bgX2        = document.getElementById('evt-bg-x2');
+  const bgX5        = document.getElementById('evt-bg-x5');
+  const bgX10       = document.getElementById('evt-bg-x10');
+  const fwCanvas    = document.getElementById('evt-fireworks');
+  const boostBadge  = document.getElementById('evt-boost-badge');
+  const boostNum    = document.getElementById('evt-boost-num');
+  const timerEl     = document.getElementById('evt-timer');
+  const timerTxt    = document.getElementById('evt-timer-text');
+  const multTag     = document.getElementById('evt-mult-tag');
+  const multTxt     = document.getElementById('evt-mult-text');
+  const notifOvl    = document.getElementById('evt-notif-overlay');
+  const audioEl     = document.getElementById('evt-audio');
+  const aktsiyaLbl  = document.getElementById('aktsiya-tab-label');
+
+  // ── FIREWORKS ──
+  function fwResize() {
+    fwCanvas.width  = window.innerWidth;
+    fwCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', fwResize);
+  fwResize();
+
+  const FW_COLORS = ['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#c77dff','#ff9ff3','#54a0ff','#ff8800'];
+
+  function fwBurst(x, y, count) {
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 / count) * i + Math.random() * 0.3;
+      const speed = 2.5 + Math.random() * 5;
+      fwParticles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1,
+        decay: 0.011 + Math.random() * 0.013,
+        color: FW_COLORS[Math.floor(Math.random() * FW_COLORS.length)],
+        size: 2 + Math.random() * 3,
+      });
+    }
+  }
+
+  let fwLastBurst = 0;
+  function fwDraw(ts) {
+    const ctx = fwCanvas.getContext('2d');
+    ctx.fillStyle = 'rgba(0,0,0,0.13)';
+    ctx.fillRect(0, 0, fwCanvas.width, fwCanvas.height);
+
+    const interval = currentMult >= 10 ? 450 : 900;
+    if (ts - fwLastBurst > interval) {
+      const x = fwCanvas.width * (0.08 + Math.random() * 0.84);
+      const y = fwCanvas.height * (0.04 + Math.random() * 0.5);
+      const count = currentMult >= 10 ? 80 : 55;
+      fwBurst(x, y, count);
+      fwLastBurst = ts;
+    }
+
+    fwParticles = fwParticles.filter(p => {
+      p.x += p.vx; p.y += p.vy;
+      p.vy += 0.055; p.vx *= 0.991;
+      p.life -= p.decay;
+      if (p.life <= 0) return false;
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      ctx.fill();
+      return true;
+    });
+    ctx.globalAlpha = 1;
+    fwAnimId = requestAnimationFrame(fwDraw);
+  }
+
+  function startFireworks() {
+    if (fwAnimId) cancelAnimationFrame(fwAnimId);
+    fwParticles = [];
+    fwLastBurst = 0;
+    fwCanvas.getContext('2d').clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+    fwAnimId = requestAnimationFrame(fwDraw);
+  }
+
+  function stopFireworks() {
+    if (fwAnimId) cancelAnimationFrame(fwAnimId);
+    fwAnimId = null;
+    const ctx = fwCanvas.getContext('2d');
+    if (ctx) ctx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+    fwParticles = [];
+  }
+
+  // ── X5 NEON ORBS (create once) ──
+  function buildX5Orbs() {
+    const glow = document.getElementById('evt-x5-glow');
+    if (!glow || glow.children.length > 0) return;
+    for (let i = 0; i < 14; i++) {
+      const orb = document.createElement('div');
+      orb.className = 'evt-neon-orb';
+      const sz = 50 + Math.random() * 130;
+      orb.style.cssText = `
+        left:${Math.random()*100}%; top:${Math.random()*100}%;
+        width:${sz}px; height:${sz}px;
+        animation-duration:${1.4 + Math.random()*2}s;
+        animation-delay:${Math.random()*2}s;
+      `;
+      glow.appendChild(orb);
+    }
+  }
+
+  // ── PHASE UI ──
+  const MULT_STYLES = {
+    0:  { color: '#ffffff', glow: '#ffffff', border: 'rgba(255,255,255,0.15)', timerBorder: 'rgba(255,255,255,0.2)' },
+    2:  { color: '#ffd700', glow: '#ffaa00', border: 'rgba(255,215,0,0.5)',    timerBorder: 'rgba(255,215,0,0.4)' },
+    5:  { color: '#00c8ff', glow: '#0088ff', border: 'rgba(0,200,255,0.5)',    timerBorder: 'rgba(0,200,255,0.4)' },
+    10: { color: '#ff3300', glow: '#ff0000', border: 'rgba(255,51,0,0.5)',     timerBorder: 'rgba(255,51,0,0.4)'  },
+  };
+
+  function setPhaseUI(mult) {
+    currentMult = mult;
+    const s = MULT_STYLES[mult] || MULT_STYLES[0];
+
+    // Backgrounds — crossfade
+    bgRainbow.style.opacity = (mult === 0) ? '1' : '0';
+    bgX2.style.opacity      = (mult === 2) ? '1' : '0';
+    bgX5.style.opacity      = (mult === 5) ? '1' : '0';
+    bgX10.style.opacity     = (mult === 10) ? '1' : '0';
+
+    // Fireworks
+    if (mult === 5 || mult === 10) {
+      if (!fwAnimId) startFireworks();
+    } else {
+      stopFireworks();
+    }
+
+    // Boost badge
+    if (mult > 0) {
+      boostNum.textContent  = 'x' + mult;
+      boostNum.style.color  = s.color;
+      boostNum.style.textShadow = `0 0 30px ${s.glow}, 0 0 70px ${s.glow}, 0 0 120px ${s.glow}`;
+      boostBadge.style.display = 'block';
+      boostBadge.classList.add('show');
+      // Re-trigger animation
+      boostNum.style.animation = 'none';
+      void boostNum.offsetWidth;
+      boostNum.style.animation = 'evt-boost-pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both, evt-boost-float 2.5s ease-in-out 0.5s infinite';
+    } else {
+      boostBadge.classList.remove('show');
+      boostBadge.style.display = 'none';
+    }
+
+    // Timer color
+    timerEl.style.color       = s.color;
+    timerEl.style.textShadow  = `0 0 12px ${s.glow}`;
+    timerEl.style.borderColor = s.timerBorder;
+    timerEl.style.boxShadow   = `0 0 16px ${s.glow}33`;
+
+    // Mult tag
+    multTag.style.color       = s.color;
+    multTag.style.borderColor = s.border;
+    multTag.style.boxShadow   = `0 0 12px ${s.glow}44`;
+    if (mult === 0) {
+      multTxt.textContent = '🎵 ЭВЕНТ';
+    } else {
+      multTxt.textContent = '⚡ БУСТ x' + mult;
+    }
+
+    // Aktsiya label
+    if (aktsiyaLbl) {
+      if (mult > 0) {
+        aktsiyaLbl.innerHTML = '💎 Акция · Кристальный тап ✦ <span style="color:' + s.color + ';text-shadow:0 0 10px ' + s.glow + '">⚡x' + mult + '</span>';
+      } else {
+        aktsiyaLbl.innerHTML = '💎 Акция · Кристальный тап ✦ <span class="aktsiya-tab-dot"></span>';
+      }
+    }
+  }
+
+  // ── AUDIO ──
+  function startAudio() {
+    if (!audioEl.src || !audioUrl) return;
+    audioEl.loop   = true;
+    audioEl.volume = 0.85;
+    audioEl.play().catch(() => {});
+  }
+
+  function stopAndDestroyAudio() {
+    audioEl.pause();
+    audioEl.removeAttribute('src');
+    audioEl.load();
+    if (audioUrl) {
+      URL.revokeObjectURL(audioUrl);
+      audioUrl = null;
+    }
+  }
+
+  // ── EVENT TICK ──
+  function evtTickFn() {
+    const elapsed = (Date.now() - evtStartTs) / 1000;
+    const left    = Math.max(0, EVT_DURATION_SEC - elapsed);
+
+    // Timer display
+    const m = Math.floor(left / 60);
+    const s = Math.floor(left % 60);
+    timerTxt.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+
+    // Determine current phase
+    const phase = PHASES.find(p => elapsed >= p.start && elapsed < p.end);
+    const mult  = phase ? phase.mult : 0;
+    if (mult !== currentMult) setPhaseUI(mult);
+
+    if (left <= 0) {
+      endEvent();
+    }
+  }
+
+  // ── START EVENT ──
+  function startEvent() {
+    evtState   = 'event';
+    evtStartTs = Date.now();
+    currentMult = 0;
+
+    overlay.classList.add('show');
+    overlay.style.pointerEvents = 'none';
+    timerEl.classList.add('show');
+    multTag.classList.add('show');
+
+    // Start rainbow bg
+    setPhaseUI(0);
+
+    // Start audio
+    startAudio();
+
+    evtTick = setInterval(evtTickFn, 250);
+  }
+
+  // ── END EVENT ──
+  function endEvent() {
+    clearInterval(evtTick);
+    evtState = 'idle';
+
+    stopFireworks();
+    stopAndDestroyAudio();
+
+    overlay.classList.remove('show');
+    timerEl.classList.remove('show');
+    multTag.classList.remove('show');
+    boostBadge.classList.remove('show');
+    boostBadge.style.display = 'none';
+
+    // Reset all bgs
+    bgRainbow.style.opacity = '0';
+    bgX2.style.opacity      = '0';
+    bgX5.style.opacity      = '0';
+    bgX10.style.opacity     = '0';
+
+    currentMult = 0;
+
+    if (aktsiyaLbl) aktsiyaLbl.textContent = '💎 Акция · Кристальный тап ✦';
+
+    // Remove file input (auto-delete from memory — already done in stopAndDestroyAudio)
+    const fi = document.getElementById('evt-file-input');
+    if (fi) fi.value = '';
+  }
+
+  // ── SHOW NOTIF ──
+  function showNotif() {
+    evtState = 'notif';
+    notifOvl.classList.add('show');
+    // Badge on акция tab
+    if (aktsiyaLbl) {
+      aktsiyaLbl.innerHTML = '💎 Акция · Кристальный тап ✦ <span class="aktsiya-tab-dot"></span>';
+    }
+  }
+
+  window.evtDismissNotif = function() {
+    notifOvl.classList.remove('show');
+  };
+
+  // ── FILE UPLOAD HANDLING ──
+  function evtHandleFile(file) {
+    if (!file) return;
+    if (audioUrl) URL.revokeObjectURL(audioUrl);
+    audioUrl = URL.createObjectURL(file);
+    audioEl.src = audioUrl;
+    showToast('🎵 Музыка для эвента загружена: ' + file.name);
+  }
+
+  // Inject file input button into page (hidden, triggered programmatically)
+  const fileInputEl = document.createElement('input');
+  fileInputEl.type = 'file';
+  fileInputEl.accept = 'audio/*';
+  fileInputEl.id = 'evt-file-input';
+  fileInputEl.style.display = 'none';
+  fileInputEl.addEventListener('change', e => {
+    evtHandleFile(e.target.files[0]);
+  });
+  document.body.appendChild(fileInputEl);
+
+  // ── MAIN SCHEDULER ──
+  function evtSchedulerTick() {
+    if (evtState === 'event') return; // already running
+
+    const secLeft = getSecondsUntilEvent();
+
+    // Show notif 60 sec before (but not if > 70 or already shown)
+    if (secLeft > 0 && secLeft <= 62 && secLeft > 1 && evtState !== 'notif') {
+      showNotif();
+    }
+
+    // Start event exactly at 16:00
+    if (secLeft <= 0 && secLeft > -EVT_DURATION_SEC && evtState !== 'event') {
+      // We're inside the event window
+      notifOvl.classList.remove('show');
+      evtStartTs = getNextEventStart().getTime();
+      startEvent();
+    }
+  }
+
+  // Build x5 orbs now
+  buildX5Orbs();
+
+  // Run scheduler every 500ms
+  setInterval(evtSchedulerTick, 500);
+  evtSchedulerTick();
+
+  // ── DEV PANEL (для теста) ──
+  // Создаём маленькую кнопку DEV в правом нижнем углу
+  const devBtn = document.createElement('div');
+  devBtn.style.cssText = `
+    position:fixed; bottom:16px; right:16px; z-index:99999;
+    font-family:'Exo 2',sans-serif; font-size:11px; font-weight:700;
+    color:rgba(255,255,255,0.3); background:rgba(0,0,0,0.5);
+    border:1px solid rgba(255,255,255,0.1); border-radius:8px;
+    padding:5px 10px; cursor:pointer; letter-spacing:1px;
+    user-select:none;
+  `;
+  devBtn.textContent = 'DEV';
+  document.body.appendChild(devBtn);
+
+  const devPanel = document.createElement('div');
+  devPanel.style.cssText = `
+    position:fixed; bottom:44px; right:16px; z-index:99999;
+    background:rgba(0,0,0,0.92); border:1px solid rgba(255,255,255,0.15);
+    border-radius:12px; padding:12px; display:none;
+    flex-direction:column; gap:6px; min-width:190px;
+  `;
+  document.body.appendChild(devPanel);
+
+  const devItems = [
+    ['🔔 Уведомление', () => { showNotif(); }],
+    ['🌈 Старт эвента (16:00)', () => { notifOvl.classList.remove('show'); evtStartTs = Date.now(); startEvent(); setPhaseUI(0); }],
+    ['⭐ x2 Буст', () => { if (evtState!=='event'){evtStartTs=Date.now()-90000;startEvent();} setPhaseUI(2); }],
+    ['💙 x5 Буст', () => { if (evtState!=='event'){evtStartTs=Date.now()-270000;startEvent();} setPhaseUI(5); }],
+    ['🔥 x10 Буст', () => { if (evtState!=='event'){evtStartTs=Date.now()-630000;startEvent();} setPhaseUI(10); }],
+    ['⏹ Завершить', () => { endEvent(); }],
+    ['🎵 Загрузить музыку', () => { fileInputEl.click(); }],
+  ];
+
+  devItems.forEach(([label, fn]) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.style.cssText = `
+      background:rgba(255,255,255,0.08); border:none; color:#fff;
+      border-radius:7px; padding:7px 10px; font-size:12px; font-family:'Exo 2',sans-serif;
+      font-weight:600; cursor:pointer; text-align:left; letter-spacing:.5px;
+      transition:background .15s;
+    `;
+    b.onmouseenter = () => b.style.background = 'rgba(255,255,255,0.16)';
+    b.onmouseleave = () => b.style.background = 'rgba(255,255,255,0.08)';
+    b.onclick = fn;
+    devPanel.appendChild(b);
+  });
+
+  devBtn.onclick = () => {
+    devPanel.style.display = devPanel.style.display === 'none' ? 'flex' : 'none';
+  };
+
+})();
+
 
 
 
